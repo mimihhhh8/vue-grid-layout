@@ -106,6 +106,10 @@
             preventCollision: {
                 type: Boolean,
                 default: false
+            },
+            cover: {
+                type: Boolean,
+                default: true
             }
         },
         data: function () {
@@ -158,8 +162,7 @@
         mounted: function() {
             this.$emit('layout-mounted', this.layout);
             this.$nextTick(function () {
-                validateLayout(this.layout);
-
+                if(!this.cover) validateLayout(this.layout);
                 this.originalLayout = this.layout;
                 const self = this;
                 this.$nextTick(function() {
@@ -170,7 +173,7 @@
                     //self.width = self.$el.offsetWidth;
                     addWindowEventListener('resize', self.onWindowResize);
 
-                    compact(self.layout, self.verticalCompact);
+                    if(!self.cover) compact(self.layout, self.verticalCompact);
 
                     self.$emit('layout-updated',self.layout)
 
@@ -275,7 +278,7 @@
                         this.initResponsiveFeatures();
                     }
 
-                    compact(this.layout, this.verticalCompact);
+                    if(!this.cover) compact(this.layout, this.verticalCompact);
                     this.eventBus.$emit("updateWidth", this.width);
                     this.updateHeight();
 
@@ -326,8 +329,8 @@
                 }
 
                 // Move the element to the dragged location.
-                this.layout = moveElement(this.layout, l, x, y, true, this.preventCollision);
-                compact(this.layout, this.verticalCompact);
+                this.layout = moveElement(this.layout, l, x, y, true, this.preventCollision, this.cover);
+                if(!this.cover){ compact(this.layout, this.verticalCompact); }
                 // needed because vue can't detect changes on array element properties
                 this.eventBus.$emit("compact");
                 this.updateHeight();
@@ -388,7 +391,7 @@
 
                 if (this.responsive) this.responsiveGridLayout();
 
-                compact(this.layout, this.verticalCompact);
+                if(!this.cover) compact(this.layout, this.verticalCompact);
                 this.eventBus.$emit("compact");
                 this.updateHeight();
 
@@ -412,7 +415,8 @@
                     newBreakpoint,
                     this.lastBreakpoint,
                     newCols,
-                    this.verticalCompact
+                    this.verticalCompact,
+                    this.cover
                 );
 
                 // Store the new layout.

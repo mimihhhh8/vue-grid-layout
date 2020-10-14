@@ -55,7 +55,7 @@ export function getColsFromBreakpoint(breakpoint: Breakpoint, cols: Breakpoints)
  */
 export function findOrGenerateResponsiveLayout(orgLayout: Layout, layouts: ResponsiveLayout, breakpoints: Breakpoints,
                                                breakpoint: Breakpoint, lastBreakpoint: Breakpoint,
-                                               cols: number, verticalCompact: boolean): Layout {
+                                               cols: number, verticalCompact: boolean, cover: ?boolean): Layout {
   // If it already exists, just return it.
   if (layouts[breakpoint]) return cloneLayout(layouts[breakpoint]);
   // Find or generate the next layout
@@ -71,6 +71,7 @@ export function findOrGenerateResponsiveLayout(orgLayout: Layout, layouts: Respo
     }
   }
   layout = cloneLayout(layout || []); // clone layout so we don't modify existing items
+  if(cover) return correctBounds(layout, {cols: cols});
   return compact(correctBounds(layout, {cols: cols}), verticalCompact);
 }
 
