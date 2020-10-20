@@ -191,12 +191,17 @@
                 required: false,
                 default: 'a, button'
             },
+            isOverflow:{
+                type:Boolean,
+                default:false
+            }
         },
         inject: ["eventBus"],
         data: function () {
             return {
                 cols: 1,
                 containerWidth: 100,
+                containerHeight: 100,
                 rowHeight: 30,
                 margin: [10, 10],
                 maxRows: Infinity,
@@ -296,9 +301,15 @@
             }
         },
         mounted: function () {
+            this.$emit('childMsg',this.isOverflow)
             this.cols = this.$parent.colNum;
             this.rowHeight = this.$parent.rowHeight;
             this.containerWidth = this.$parent.width !== null ? this.$parent.width : 100;
+           if(!this.isOverflow&&Object.keys(this.$parent.layoutStyle).length !== 0){
+                let height = this.$parent.layoutStyle.height
+                let newHeight = height.substring(0,height.length-2)
+                this.containerHeight = newHeight !== null ? newHeight : 100;
+           }
             this.margin = this.$parent.margin !== undefined ? this.$parent.margin : [10, 10];
             this.maxRows = this.$parent.maxRows;
             if (this.isDraggable === null) {
@@ -645,27 +656,33 @@
             },
             calcPosition: function (x, y, w, h) {
                 const colWidth = this.calcColWidth();
+                const colHeight = this.calcColHeight();
                 // add rtl support
                 let out;
+                let domHeight = this.isOverflow ? this.rowHeight : colHeight
                 if (this.renderRtl) {
                     out = {
                         right: Math.round(colWidth * x + (x + 1) * this.margin[0]),
-                        top: Math.round(this.rowHeight * y + (y + 1) * this.margin[1]),
+                        top: Math.round(domHeight * y + (y + 1) * this.margin[1]),
                         // 0 * Infinity === NaN, which causes problems with resize constriants;
                         // Fix this if it occurs.
                         // Note we do it here rather than later because Math.round(Infinity) causes deopt
                         width: w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]),
-                        height: h === Infinity ? h : Math.round(this.rowHeight * h + Math.max(0, h - 1) * this.margin[1])
+                        height: h === Infinity ? h : Math.round(domHeight * h + Math.max(0, h - 1) * this.margin[1])
                     };
                 } else {
+                    let height = parseInt(this.containerHeight)
+                    let top = Math.round(domHeight * y + (y + 1) * this.margin[1])
+                    let canOverflow =( h === Infinity )? h : Math.round(domHeight * h + Math.max(0, h - 1) * this.margin[1])
+                    let noOverflow = ((canOverflow + top)>height) ? (height - top) : canOverflow
                     out = {
                         left: Math.round(colWidth * x + (x + 1) * this.margin[0]),
-                        top: Math.round(this.rowHeight * y + (y + 1) * this.margin[1]),
+                        top: Math.round(domHeight * y + (y + 1) * this.margin[1]),
                         // 0 * Infinity === NaN, which causes problems with resize constriants;
                         // Fix this if it occurs.
                         // Note we do it here rather than later because Math.round(Infinity) causes deopt
                         width: w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]),
-                        height: h === Infinity ? h : Math.round(this.rowHeight * h + Math.max(0, h - 1) * this.margin[1])
+                        height: this.isOverflow ? canOverflow : noOverflow
                     };
                 }
 
@@ -681,7 +698,8 @@
             // TODO check if this function needs change in order to support rtl.
             calcXY(top, left) {
                 const colWidth = this.calcColWidth();
-
+                const colHeight = this.calcColHeight();
+                let domHeight = this.isOverflow ? this.rowHeight : colHeight
                 // left = colWidth * x + margin * (x + 1)
                 // l = cx + m(x+1)
                 // l = cx + mx + m
@@ -690,7 +708,7 @@
                 // (l - m) / (c + m) = x
                 // x = (left - margin) / (coldWidth + margin)
                 let x = Math.round((left - this.margin[0]) / (colWidth + this.margin[0]));
-                let y = Math.round((top - this.margin[1]) / (this.rowHeight + this.margin[1]));
+                let y = Math.round((top - this.margin[1]) / (domHeight + this.margin[1]));
 
                 // Capping
                 x = Math.max(Math.min(x, this.cols - this.innerW), 0);
@@ -704,6 +722,12 @@
                // console.log("### COLS=" + this.cols + " COL WIDTH=" + colWidth + " MARGIN " + this.margin[0]);
                 return colWidth;
             },
+            calcColHeight() {
+                let height = parseInt(this.containerHeight)
+                const colHeight = (height - (this.margin[1] * (this.cols + 1))) / this.cols;
+               // console.log("### COLS=" + this.cols + " COL WIDTH=" + colWidth + " MARGIN " + this.margin[0]);
+                return colHeight;
+            },
 
             /**
              * Given a height and width in pixel values, calculate grid units.
@@ -713,12 +737,13 @@
              */
             calcWH(height, width) {
                 const colWidth = this.calcColWidth();
-
+                const colHeight = this.calcColHeight();
+                let domHeight = this.isOverflow ? this.rowHeight : colHeight
                 // width = colWidth * w - (margin * (w - 1))
                 // ...
                 // w = (width + margin) / (colWidth + margin)
                 let w = Math.round((width + this.margin[0]) / (colWidth + this.margin[0]));
-                let h = Math.round((height + this.margin[1]) / (this.rowHeight + this.margin[1]));
+                let h = Math.round((height + this.margin[1]) / (domHeight + this.margin[1]));
 
                 // Capping
                 w = Math.max(Math.min(w, this.cols - this.innerX), 0);

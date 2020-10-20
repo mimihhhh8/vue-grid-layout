@@ -1,7 +1,8 @@
 <template>
-    <div ref="item" class="vue-grid-layout" :style="mergedStyle">
+    <div ref="item" class="vue-grid-layout" :style="isOverflow?mergedStyle:layoutStyle">
         <slot></slot>
         <grid-item class="vue-grid-placeholder"
+                   @childMsg="getChildData"
                    v-show="isDragging"
                    :x="placeholder.x"
                    :y="placeholder.y"
@@ -110,6 +111,12 @@
             cover: {
                 type: Boolean,
                 default: true
+            },
+            layoutStyle:{
+                type: Object,
+                default: function() {
+                    return {};
+                }
             }
         },
         data: function () {
@@ -128,6 +135,7 @@
                 layouts: {}, // array to store all layouts from different breakpoints
                 lastBreakpoint: null, // store last active breakpoint
                 originalLayout: null, // store original Layout
+                isOverflow:false,
             };
         },
         created () {
@@ -160,6 +168,7 @@
             this.$emit('layout-before-mount', this.layout);
         },
         mounted: function() {
+
             this.$emit('layout-mounted', this.layout);
             this.$nextTick(function () {
                 if(!this.cover) validateLayout(this.layout);
@@ -255,6 +264,9 @@
             }
         },
         methods: {
+            getChildData(data){
+                this.isOverflow = data
+            },
             layoutUpdate() {
                 if (this.layout !== undefined && this.originalLayout !== null) {
                     if (this.layout.length !== this.originalLayout.length) {

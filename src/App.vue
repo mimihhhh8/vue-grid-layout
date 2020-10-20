@@ -37,6 +37,7 @@
             </div>
             <grid-layout
                 :margin="[parseInt(marginX), parseInt(marginY)]"
+                    :layout-style="layoutStyle"
                     :layout.sync="layout"
                     :col-num="parseInt(colNum)"
                     :row-height="rowHeight"
@@ -121,15 +122,15 @@
         {"x":4,"y":5,"w":2,"h":5,"i":"8", resizable: false, draggable: false, static: false},
         {"x":6,"y":3,"w":2,"h":4,"i":"9", resizable: false, draggable: false, static: true},
         {"x":8,"y":4,"w":2,"h":4,"i":"10", resizable: false, draggable: false, static: false},
-        {"x":10,"y":4,"w":2,"h":4,"i":"11", resizable: false, draggable: false, static: false},
-        {"x":0,"y":10,"w":2,"h":5,"i":"12", resizable: false, draggable: false, static: false},
-        {"x":2,"y":10,"w":2,"h":5,"i":"13", resizable: false, draggable: false, static: false},
-        {"x":4,"y":8,"w":2,"h":4,"i":"14", resizable: false, draggable: false, static: false},
-        {"x":6,"y":8,"w":2,"h":4,"i":"15", resizable: false, draggable: false, static: false},
-        {"x":8,"y":10,"w":2,"h":5,"i":"16", resizable: false, draggable: false, static: false},
-        {"x":10,"y":4,"w":2,"h":2,"i":"17", resizable: false, draggable: false, static: false},
-        {"x":0,"y":9,"w":2,"h":3,"i":"18", resizable: false, draggable: false, static: false},
-        {"x":2,"y":6,"w":2,"h":2,"i":"19", resizable: false, draggable: false, static: false}
+        // {"x":10,"y":4,"w":2,"h":4,"i":"11", resizable: false, draggable: false, static: false},
+        // {"x":0,"y":10,"w":2,"h":5,"i":"12", resizable: false, draggable: false, static: false},
+        // {"x":2,"y":10,"w":2,"h":5,"i":"13", resizable: false, draggable: false, static: false},
+        // {"x":4,"y":8,"w":2,"h":4,"i":"14", resizable: false, draggable: false, static: false},
+        // {"x":6,"y":8,"w":2,"h":4,"i":"15", resizable: false, draggable: false, static: false},
+        // {"x":8,"y":10,"w":2,"h":5,"i":"16", resizable: false, draggable: false, static: false},
+        // {"x":10,"y":4,"w":2,"h":2,"i":"17", resizable: false, draggable: false, static: false},
+        // {"x":0,"y":9,"w":2,"h":3,"i":"18", resizable: false, draggable: false, static: false},
+        // {"x":2,"y":6,"w":2,"h":2,"i":"19", resizable: false, draggable: false, static: false}
     ];
 
     export default {
@@ -155,6 +156,10 @@
                 index: 0,
                 marginX: 10,
                 marginY: 10,
+                layoutStyle:{
+                    height:'600px',
+                    background:'blue'
+                }
             }
         },
         mounted: function () {
