@@ -1054,12 +1054,12 @@ module.exports = function (Constructor, NAME, next) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4d42f3-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=template&id=00d0cbb9&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-layout",style:(_vm.isOverflow?_vm.mergedStyle:_vm.layoutStyle)},[_vm._t("default"),_c('grid-item',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging),expression:"isDragging"}],staticClass:"vue-grid-placeholder",attrs:{"x":_vm.placeholder.x,"y":_vm.placeholder.y,"w":_vm.placeholder.w,"h":_vm.placeholder.h,"i":_vm.placeholder.i},on:{"childMsg":_vm.getChildData}})],2)}
+// CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"54e891bf-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=template&id=0be14bb9&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-layout",style:(_vm.mergedStyle)},[_vm._t("default"),_c('grid-item',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging),expression:"isDragging"}],staticClass:"vue-grid-placeholder",attrs:{"x":_vm.placeholder.x,"y":_vm.placeholder.y,"w":_vm.placeholder.w,"h":_vm.placeholder.h,"i":_vm.placeholder.i}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GridLayout.vue?vue&type=template&id=00d0cbb9&
+// CONCATENATED MODULE: ./src/components/GridLayout.vue?vue&type=template&id=0be14bb9&
 
 // EXTERNAL MODULE: ./node_modules/_core-js@2.6.11@core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("5ab2");
@@ -1322,7 +1322,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 //
 //
 //
-//
 
 
 var elementResizeDetectorMaker = __webpack_require__("054c");
@@ -1437,6 +1436,9 @@ var elementResizeDetectorMaker = __webpack_require__("054c");
       default: function _default() {
         return {};
       }
+    },
+    maxHeight: {
+      type: Number
     }
   },
   data: function data() {
@@ -1456,9 +1458,8 @@ var elementResizeDetectorMaker = __webpack_require__("054c");
       // array to store all layouts from different breakpoints
       lastBreakpoint: null,
       // store last active breakpoint
-      originalLayout: null,
-      // store original Layout
-      isOverflow: false
+      originalLayout: null // store original Layout
+
     };
   },
   created: function created() {
@@ -1584,9 +1585,6 @@ var elementResizeDetectorMaker = __webpack_require__("054c");
     }
   },
   methods: {
-    getChildData: function getChildData(data) {
-      this.isOverflow = data;
-    },
     layoutUpdate: function layoutUpdate() {
       if (this.layout !== undefined && this.originalLayout !== null) {
         if (this.layout.length !== this.originalLayout.length) {
@@ -1617,9 +1615,11 @@ var elementResizeDetectorMaker = __webpack_require__("054c");
       }
     },
     updateHeight: function updateHeight() {
-      this.mergedStyle = {
-        height: this.containerHeight()
-      };
+      if (!this.maxHeight) {
+        this.mergedStyle = {
+          height: this.containerHeight()
+        };
+      }
     },
     onWindowResize: function onWindowResize() {
       if (this.$refs !== null && this.$refs.item !== null && this.$refs.item !== undefined) {
@@ -1676,7 +1676,9 @@ var elementResizeDetectorMaker = __webpack_require__("054c");
       if (eventName === 'dragend') this.$emit('layout-updated', this.layout);
     },
     resizeEvent: function resizeEvent(eventName, id, x, y, h, w) {
-      var l = Object(utils["f" /* getLayoutItem */])(this.layout, id); //GetLayoutItem sometimes return null object
+      var l = Object(utils["f" /* getLayoutItem */])(this.layout, id); // eslint-disable-next-line
+
+      debugger; //GetLayoutItem sometimes return null object
 
       if (l === undefined || l === null) {
         l = {
@@ -14270,24 +14272,15 @@ return _$index_29;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4d42f3-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=template&id=9afc6a38&
+// CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"54e891bf-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=template&id=574ff30f&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-item",class:_vm.classObj,style:(_vm.style)},[_vm._t("default"),(_vm.resizableAndNotStatic)?_c('span',{ref:"handle",class:_vm.resizableHandleClass}):_vm._e()],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=template&id=9afc6a38&
+// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=template&id=574ff30f&
 
 // EXTERNAL MODULE: ./node_modules/_core-js@2.6.11@core-js/modules/es6.regexp.match.js
 var es6_regexp_match = __webpack_require__("9e76");
-
-// EXTERNAL MODULE: ./node_modules/_core-js@2.6.11@core-js/modules/web.dom.iterable.js
-var web_dom_iterable = __webpack_require__("6d57");
-
-// EXTERNAL MODULE: ./node_modules/_core-js@2.6.11@core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("e44b");
-
-// EXTERNAL MODULE: ./node_modules/_core-js@2.6.11@core-js/modules/es6.object.keys.js
-var es6_object_keys = __webpack_require__("e10e");
 
 // EXTERNAL MODULE: ./node_modules/_core-js@2.6.11@core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("163d");
@@ -14352,9 +14345,6 @@ function isNum(num) {
 var DOM = __webpack_require__("1ca7");
 
 // CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--12-0!./node_modules/_thread-loader@2.1.3@thread-loader/dist/cjs.js!./node_modules/_babel-loader@8.1.0@babel-loader/lib!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=script&lang=js&
-
-
-
 
 
 //
@@ -14548,10 +14538,6 @@ var interact = __webpack_require__("b8c5");
       type: String,
       required: false,
       default: 'a, button'
-    },
-    isOverflow: {
-      type: Boolean,
-      default: false
     }
   },
   inject: ["eventBus"],
@@ -14658,17 +14644,10 @@ var interact = __webpack_require__("b8c5");
     }
   },
   mounted: function mounted() {
-    this.$emit('childMsg', this.isOverflow);
     this.cols = this.$parent.colNum;
     this.rowHeight = this.$parent.rowHeight;
     this.containerWidth = this.$parent.width !== null ? this.$parent.width : 100;
-
-    if (!this.isOverflow && Object.keys(this.$parent.layoutStyle).length !== 0) {
-      var height = this.$parent.layoutStyle.height;
-      var newHeight = height.substring(0, height.length - 2);
-      this.containerHeight = newHeight !== null ? newHeight : 100;
-    }
-
+    this.containerHeight = this.$parent.maxHeight !== null ? this.$parent.maxHeight : 0;
     this.margin = this.$parent.margin !== undefined ? this.$parent.margin : [10, 10];
     this.maxRows = this.$parent.maxRows;
 
@@ -14877,7 +14856,9 @@ var interact = __webpack_require__("b8c5");
         case "resizestart":
           {
             this.previousW = this.innerW;
-            this.previousH = this.innerH;
+            this.previousH = this.innerH; // eslint-disable-next-line
+            // debugger
+
             pos = this.calcPosition(this.innerX, this.innerY, this.innerW, this.innerH);
             newSize.width = pos.width;
             newSize.height = pos.height;
@@ -15058,10 +15039,13 @@ var interact = __webpack_require__("b8c5");
     },
     calcPosition: function calcPosition(x, y, w, h) {
       var colWidth = this.calcColWidth();
-      var colHeight = this.calcColHeight(); // add rtl support
+      var colHeight = this.calcColHeight(); // eslint-disable-next-line
 
-      var out;
-      var domHeight = this.isOverflow ? this.rowHeight : colHeight;
+      debugger; // add rtl support
+
+      var out; // eslint-disable-next-line
+
+      var domHeight = this.rowHeight; // let domHeight = this.containerHeight ? colHeight : this.rowHeight
 
       if (this.renderRtl) {
         out = {
@@ -15074,10 +15058,12 @@ var interact = __webpack_require__("b8c5");
           height: h === Infinity ? h : Math.round(domHeight * h + Math.max(0, h - 1) * this.margin[1])
         };
       } else {
-        var height = parseInt(this.containerHeight);
+        var height = this.containerHeight;
         var top = Math.round(domHeight * y + (y + 1) * this.margin[1]);
         var canOverflow = h === Infinity ? h : Math.round(domHeight * h + Math.max(0, h - 1) * this.margin[1]);
-        var noOverflow = canOverflow + top > height ? height - top : canOverflow;
+        var total = canOverflow + top;
+        var dValue = height - top;
+        var noOverflow = total > height ? dValue : canOverflow;
         out = {
           left: Math.round(colWidth * x + (x + 1) * this.margin[0]),
           top: Math.round(domHeight * y + (y + 1) * this.margin[1]),
@@ -15085,7 +15071,7 @@ var interact = __webpack_require__("b8c5");
           // Fix this if it occurs.
           // Note we do it here rather than later because Math.round(Infinity) causes deopt
           width: w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]),
-          height: this.isOverflow ? canOverflow : noOverflow
+          height: this.containerHeight ? noOverflow : canOverflow
         };
       }
 
@@ -15102,7 +15088,7 @@ var interact = __webpack_require__("b8c5");
     calcXY: function calcXY(top, left) {
       var colWidth = this.calcColWidth();
       var colHeight = this.calcColHeight();
-      var domHeight = this.isOverflow ? this.rowHeight : colHeight; // left = colWidth * x + margin * (x + 1)
+      var domHeight = this.rowHeight; // left = colWidth * x + margin * (x + 1)
       // l = cx + m(x+1)
       // l = cx + mx + m
       // l - m = cx + mx
@@ -15127,8 +15113,9 @@ var interact = __webpack_require__("b8c5");
       return colWidth;
     },
     calcColHeight: function calcColHeight() {
-      var height = parseInt(this.containerHeight);
-      var colHeight = (height - this.margin[1] * (this.cols + 1)) / this.cols; // console.log("### COLS=" + this.cols + " COL WIDTH=" + colWidth + " MARGIN " + this.margin[0]);
+      // eslint-disable-next-line
+      var height = this.containerHeight;
+      var colHeight = (height - this.margin[1] * (this.rowHeight + 1)) / this.rowHeight; // console.log("### COLS=" + this.cols + " COL WIDTH=" + colWidth + " MARGIN " + this.margin[0]);
 
       return colHeight;
     },
@@ -15142,7 +15129,7 @@ var interact = __webpack_require__("b8c5");
     calcWH: function calcWH(height, width) {
       var colWidth = this.calcColWidth();
       var colHeight = this.calcColHeight();
-      var domHeight = this.isOverflow ? this.rowHeight : colHeight; // width = colWidth * w - (margin * (w - 1))
+      var domHeight = this.rowHeight; // width = colWidth * w - (margin * (w - 1))
       // ...
       // w = (width + margin) / (colWidth + margin)
 

@@ -6,6 +6,7 @@ module.exports = {
             library: "VueGridLayout",
             libraryExport: 'default'
         },
+        mode: 'production',
         // https://medium.com/js-dojo/how-to-reduce-your-vue-js-bundle-size-with-webpack-3145bf5019b7
         // plugins: [new BundleAnalyzerPlugin()],
     },
