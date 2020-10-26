@@ -668,7 +668,7 @@
                         // Fix this if it occurs.
                         // Note we do it here rather than later because Math.round(Infinity) causes deopt
                         width: w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]),
-                        height: (topValue + boxHeight) > maxHeight ? (maxHeight - topValue) : boxHeight
+                        height: maxHeight ? ((topValue + boxHeight) > maxHeight ? (maxHeight - topValue) : boxHeight) : boxHeight
                     };
                 }
 

@@ -1063,12 +1063,12 @@ module.exports = function (Constructor, NAME, next) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"54e891bf-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=template&id=0be14bb9&
+// CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"54e891bf-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=template&id=1d049844&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-layout",style:(_vm.mergedStyle)},[_vm._t("default"),_c('grid-item',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging),expression:"isDragging"}],staticClass:"vue-grid-placeholder",attrs:{"x":_vm.placeholder.x,"y":_vm.placeholder.y,"w":_vm.placeholder.w,"h":_vm.placeholder.h,"i":_vm.placeholder.i}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GridLayout.vue?vue&type=template&id=0be14bb9&
+// CONCATENATED MODULE: ./src/components/GridLayout.vue?vue&type=template&id=1d049844&
 
 // EXTERNAL MODULE: ./node_modules/_core-js@2.6.11@core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("5ab2");
@@ -1440,12 +1440,6 @@ var elementResizeDetectorMaker = __webpack_require__("054c");
       type: Boolean,
       default: true
     },
-    layoutStyle: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
     maxHeight: {
       type: Number
     }
@@ -1624,11 +1618,9 @@ var elementResizeDetectorMaker = __webpack_require__("054c");
       }
     },
     updateHeight: function updateHeight() {
-      if (!this.maxHeight) {
-        this.mergedStyle = {
-          height: this.containerHeight()
-        };
-      }
+      this.mergedStyle = {
+        height: this.containerHeight()
+      };
     },
     onWindowResize: function onWindowResize() {
       if (this.$refs !== null && this.$refs.item !== null && this.$refs.item !== undefined) {
@@ -1685,9 +1677,7 @@ var elementResizeDetectorMaker = __webpack_require__("054c");
       if (eventName === 'dragend') this.$emit('layout-updated', this.layout);
     },
     resizeEvent: function resizeEvent(eventName, id, x, y, h, w) {
-      var l = Object(utils["f" /* getLayoutItem */])(this.layout, id); // eslint-disable-next-line
-
-      debugger; //GetLayoutItem sometimes return null object
+      var l = Object(utils["f" /* getLayoutItem */])(this.layout, id); //GetLayoutItem sometimes return null object
 
       if (l === undefined || l === null) {
         l = {
@@ -14281,12 +14271,12 @@ return _$index_29;
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"54e891bf-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=template&id=574ff30f&
+// CONCATENATED MODULE: ./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"54e891bf-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@2.0.1@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=template&id=5d41e675&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-item",class:_vm.classObj,style:(_vm.style)},[_vm._t("default"),(_vm.resizableAndNotStatic)?_c('span',{ref:"handle",class:_vm.resizableHandleClass}):_vm._e()],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=template&id=574ff30f&
+// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=template&id=5d41e675&
 
 // EXTERNAL MODULE: ./node_modules/_core-js@2.6.11@core-js/modules/es6.regexp.match.js
 var es6_regexp_match = __webpack_require__("9e76");
@@ -14554,7 +14544,6 @@ var interact = __webpack_require__("b8c5");
     return {
       cols: 1,
       containerWidth: 100,
-      containerHeight: 100,
       rowHeight: 30,
       margin: [10, 10],
       maxRows: Infinity,
@@ -14656,7 +14645,6 @@ var interact = __webpack_require__("b8c5");
     this.cols = this.$parent.colNum;
     this.rowHeight = this.$parent.rowHeight;
     this.containerWidth = this.$parent.width !== null ? this.$parent.width : 100;
-    this.containerHeight = this.$parent.maxHeight !== null ? this.$parent.maxHeight : 0;
     this.margin = this.$parent.margin !== undefined ? this.$parent.margin : [10, 10];
     this.maxRows = this.$parent.maxRows;
 
@@ -14865,9 +14853,7 @@ var interact = __webpack_require__("b8c5");
         case "resizestart":
           {
             this.previousW = this.innerW;
-            this.previousH = this.innerH; // eslint-disable-next-line
-            // debugger
-
+            this.previousH = this.innerH;
             pos = this.calcPosition(this.innerX, this.innerY, this.innerW, this.innerH);
             newSize.width = pos.width;
             newSize.height = pos.height;
@@ -15047,40 +15033,32 @@ var interact = __webpack_require__("b8c5");
       this.eventBus.$emit("dragEvent", event.type, this.i, pos.x, pos.y, this.innerH, this.innerW);
     },
     calcPosition: function calcPosition(x, y, w, h) {
-      var colWidth = this.calcColWidth();
-      var colHeight = this.calcColHeight(); // eslint-disable-next-line
+      var colWidth = this.calcColWidth(); // add rtl support
 
-      debugger; // add rtl support
-
-      var out; // eslint-disable-next-line
-
-      var domHeight = this.rowHeight; // let domHeight = this.containerHeight ? colHeight : this.rowHeight
+      var out;
 
       if (this.renderRtl) {
         out = {
           right: Math.round(colWidth * x + (x + 1) * this.margin[0]),
-          top: Math.round(domHeight * y + (y + 1) * this.margin[1]),
+          top: Math.round(this.rowHeight * y + (y + 1) * this.margin[1]),
           // 0 * Infinity === NaN, which causes problems with resize constriants;
           // Fix this if it occurs.
           // Note we do it here rather than later because Math.round(Infinity) causes deopt
           width: w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]),
-          height: h === Infinity ? h : Math.round(domHeight * h + Math.max(0, h - 1) * this.margin[1])
+          height: h === Infinity ? h : Math.round(this.rowHeight * h + Math.max(0, h - 1) * this.margin[1])
         };
       } else {
-        var height = this.containerHeight;
-        var top = Math.round(domHeight * y + (y + 1) * this.margin[1]);
-        var canOverflow = h === Infinity ? h : Math.round(domHeight * h + Math.max(0, h - 1) * this.margin[1]);
-        var total = canOverflow + top;
-        var dValue = height - top;
-        var noOverflow = total > height ? dValue : canOverflow;
+        var topValue = Math.round(this.rowHeight * y + (y + 1) * this.margin[1]);
+        var maxHeight = this.$parent.maxHeight;
+        var boxHeight = h === Infinity ? h : Math.round(this.rowHeight * h + Math.max(0, h - 1) * this.margin[1]);
         out = {
           left: Math.round(colWidth * x + (x + 1) * this.margin[0]),
-          top: Math.round(domHeight * y + (y + 1) * this.margin[1]),
+          top: Math.round(this.rowHeight * y + (y + 1) * this.margin[1]),
           // 0 * Infinity === NaN, which causes problems with resize constriants;
           // Fix this if it occurs.
           // Note we do it here rather than later because Math.round(Infinity) causes deopt
           width: w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]),
-          height: this.containerHeight ? noOverflow : canOverflow
+          height: maxHeight ? topValue + boxHeight > maxHeight ? maxHeight - topValue : boxHeight : boxHeight
         };
       }
 
@@ -15095,9 +15073,7 @@ var interact = __webpack_require__("b8c5");
      */
     // TODO check if this function needs change in order to support rtl.
     calcXY: function calcXY(top, left) {
-      var colWidth = this.calcColWidth();
-      var colHeight = this.calcColHeight();
-      var domHeight = this.rowHeight; // left = colWidth * x + margin * (x + 1)
+      var colWidth = this.calcColWidth(); // left = colWidth * x + margin * (x + 1)
       // l = cx + m(x+1)
       // l = cx + mx + m
       // l - m = cx + mx
@@ -15106,7 +15082,7 @@ var interact = __webpack_require__("b8c5");
       // x = (left - margin) / (coldWidth + margin)
 
       var x = Math.round((left - this.margin[0]) / (colWidth + this.margin[0]));
-      var y = Math.round((top - this.margin[1]) / (domHeight + this.margin[1])); // Capping
+      var y = Math.round((top - this.margin[1]) / (this.rowHeight + this.margin[1])); // Capping
 
       x = Math.max(Math.min(x, this.cols - this.innerW), 0);
       y = Math.max(Math.min(y, this.maxRows - this.innerH), 0);
@@ -15121,13 +15097,6 @@ var interact = __webpack_require__("b8c5");
 
       return colWidth;
     },
-    calcColHeight: function calcColHeight() {
-      // eslint-disable-next-line
-      var height = this.containerHeight;
-      var colHeight = (height - this.margin[1] * (this.rowHeight + 1)) / this.rowHeight; // console.log("### COLS=" + this.cols + " COL WIDTH=" + colWidth + " MARGIN " + this.margin[0]);
-
-      return colHeight;
-    },
 
     /**
      * Given a height and width in pixel values, calculate grid units.
@@ -15136,14 +15105,12 @@ var interact = __webpack_require__("b8c5");
      * @return {Object} w, h as grid units.
      */
     calcWH: function calcWH(height, width) {
-      var colWidth = this.calcColWidth();
-      var colHeight = this.calcColHeight();
-      var domHeight = this.rowHeight; // width = colWidth * w - (margin * (w - 1))
+      var colWidth = this.calcColWidth(); // width = colWidth * w - (margin * (w - 1))
       // ...
       // w = (width + margin) / (colWidth + margin)
 
       var w = Math.round((width + this.margin[0]) / (colWidth + this.margin[0]));
-      var h = Math.round((height + this.margin[1]) / (domHeight + this.margin[1])); // Capping
+      var h = Math.round((height + this.margin[1]) / (this.rowHeight + this.margin[1])); // Capping
 
       w = Math.max(Math.min(w, this.cols - this.innerX), 0);
       h = Math.max(Math.min(h, this.maxRows - this.innerY), 0);
